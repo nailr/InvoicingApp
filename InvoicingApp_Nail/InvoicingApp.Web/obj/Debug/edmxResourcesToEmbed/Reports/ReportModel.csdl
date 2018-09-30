@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InvoicingApp_NailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="vw_InvoicePrint">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="InvoiceNumber" />
+      <PropertyRef Name="ClientId" />
+      <PropertyRef Name="ChargeId" />
+      <PropertyRef Name="CompanyName" />
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+    <Property Name="StratDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="ChargeId" Type="Int32" Nullable="false" />
+    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Units" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Tax" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CompanyName" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ChargeSymbol" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="InvoicingApp_NailEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="vw_InvoicePrint" EntityType="Self.vw_InvoicePrint" />
+    <FunctionImport Name="GetInvoceDetails" ReturnType="Collection(InvoicingApp_NailModel.GetInvoceDetails_Result)">
+      <Parameter Name="ClientId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetTotalAndTax" ReturnType="Collection(InvoicingApp_NailModel.GetTotalAndTax_Result)">
+      <Parameter Name="ClientId" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetInvoceDetails_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="InvoiceNumber" Nullable="false" MaxLength="400" />
+    <Property Type="Int32" Name="ClientId" Nullable="false" />
+    <Property Type="DateTime" Name="InvoiceDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="StratDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ChargeId" Nullable="false" />
+    <Property Type="Decimal" Name="Rate" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="Units" Nullable="true" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Tax" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="450" />
+    <Property Type="String" Name="Contract" Nullable="true" />
+    <Property Type="String" Name="ChargeSymbol" Nullable="true" MaxLength="450" />
+  </ComplexType>
+  <ComplexType Name="GetTotalAndTax_Result">
+    <Property Type="Decimal" Name="Tax" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InvoicingApp_NailModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Charges">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChargeSymbol" Type="nvarchar" MaxLength="450" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="450" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactPerson" Type="nvarchar(max)" />
+    <Property Name="ContractDateStart" Type="datetime" />
+    <Property Name="ContractDateEnd" Type="datetime" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Contract" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Invoices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" />
+    <Property Name="StratDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="ChargeId" Type="int" Nullable="false" />
+    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Units" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tax" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InvoicingApp_Nail.dbo.vw_InvoicePrint' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_InvoicePrint">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="InvoiceNumber" />
+      <PropertyRef Name="ClientId" />
+      <PropertyRef Name="ChargeId" />
+      <PropertyRef Name="CompanyName" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" />
+    <Property Name="StratDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="ChargeId" Type="int" Nullable="false" />
+    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Units" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tax" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="450" Nullable="false" />
+    <Property Name="Contract" Type="nvarchar(max)" />
+    <Property Name="ChargeSymbol" Type="nvarchar" MaxLength="450" />
+  </EntityType>
+  <Association Name="FK_dbo_Invoices_dbo_Charges_ChargeId">
+    <End Role="Charges" Type="Self.Charges" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Charges">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="ChargeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Invoices_dbo_Clients_ClientId">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetInvoceDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTotalAndTax" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="InvoicingApp_NailModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Charges" EntityType="Self.Charges" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_InvoicePrint" EntityType="Self.vw_InvoicePrint" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_InvoicePrint].[Id] AS [Id], 
+    [vw_InvoicePrint].[InvoiceNumber] AS [InvoiceNumber], 
+    [vw_InvoicePrint].[ClientId] AS [ClientId], 
+    [vw_InvoicePrint].[InvoiceDate] AS [InvoiceDate], 
+    [vw_InvoicePrint].[StratDate] AS [StratDate], 
+    [vw_InvoicePrint].[EndDate] AS [EndDate], 
+    [vw_InvoicePrint].[ChargeId] AS [ChargeId], 
+    [vw_InvoicePrint].[Rate] AS [Rate], 
+    [vw_InvoicePrint].[Units] AS [Units], 
+    [vw_InvoicePrint].[Amount] AS [Amount], 
+    [vw_InvoicePrint].[Tax] AS [Tax], 
+    [vw_InvoicePrint].[Total] AS [Total], 
+    [vw_InvoicePrint].[CompanyName] AS [CompanyName], 
+    [vw_InvoicePrint].[Contract] AS [Contract], 
+    [vw_InvoicePrint].[ChargeSymbol] AS [ChargeSymbol]
+    FROM [dbo].[vw_InvoicePrint] AS [vw_InvoicePrint]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_dbo_Invoices_dbo_Charges_ChargeId" Association="Self.FK_dbo_Invoices_dbo_Charges_ChargeId">
+      <End Role="Charges" EntitySet="Charges" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Invoices_dbo_Clients_ClientId" Association="Self.FK_dbo_Invoices_dbo_Clients_ClientId">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

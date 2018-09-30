@@ -1,0 +1,135 @@
+﻿@model PagedList.IPagedList<InvoicingApp.DAL.Entity.Invoice>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+    function showChart() {
+        var from = document.getElementById("startDate").value;
+        var to = document.getElementById("endDate").value;
+
+        if(from == null || from == "" || to == null || to == "")
+            return;
+
+        var url = '@Url.Action("ShowChart", "Invoices")?from=' +
+                 from + '&to=' + to;
+
+        window.open(url, "_blank")
+    }
+</script>
+
+<h2>Invoices</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Invoices", FormMethod.Get))
+{
+    <p>
+        Search Invoices by Invoice Number or Company Name: @Html.TextBox("searchParameter", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Invoice Number", "Index", new { sortOrder = ViewBag.NumberSortParm, currentFilter = ViewBag.CurrentFilter }) 
+        </th>
+        <th>
+            Invoice Date
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th>
+            @Html.ActionLink("Company Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter }) 
+        </th>
+        <th>
+            Charge
+        </th>
+        <th>
+            Rate
+        </th>
+        <th>
+            Units
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Tax
+        </th>
+        <th>
+            Total
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StratDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Charge.ChargeSymbol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Units)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Run Report", "InvoicePrint", new { id=item.ClientId }, new { target = "_blank" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<h3>
+    Enter filters for the chart
+</h3>
+<p>
+    Enter start date: <input type="date" id="startDate" />
+    <br />
+    Enter end date:   <input type="date" id="endDate" />
+    <button type="button" onclick="showChart()">View Chart</button>
+</p>

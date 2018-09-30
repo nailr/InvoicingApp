@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InvoicingApp_NailModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'InvoicingApp_Nail.dbo.vw_InvoicePrint' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_InvoicePrint">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ChargeId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="StratDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="ChargeId" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Units" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Tax" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Contract" Type="nvarchar(max)" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="ChargeSymbol" Type="nvarchar" MaxLength="450" />
+        </EntityType>
+        <Function Name="GetInvoceDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTotalAndTax" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="InvoicingApp_NailModelStoreContainer">
+          <EntitySet Name="vw_InvoicePrint" EntityType="Self.vw_InvoicePrint" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_InvoicePrint].[Id] AS [Id], 
+    [vw_InvoicePrint].[InvoiceNumber] AS [InvoiceNumber], 
+    [vw_InvoicePrint].[ClientId] AS [ClientId], 
+    [vw_InvoicePrint].[InvoiceDate] AS [InvoiceDate], 
+    [vw_InvoicePrint].[StratDate] AS [StratDate], 
+    [vw_InvoicePrint].[EndDate] AS [EndDate], 
+    [vw_InvoicePrint].[ChargeId] AS [ChargeId], 
+    [vw_InvoicePrint].[Rate] AS [Rate], 
+    [vw_InvoicePrint].[Units] AS [Units], 
+    [vw_InvoicePrint].[Amount] AS [Amount], 
+    [vw_InvoicePrint].[Tax] AS [Tax], 
+    [vw_InvoicePrint].[Total] AS [Total], 
+    [vw_InvoicePrint].[CompanyName] AS [CompanyName], 
+    [vw_InvoicePrint].[Contract] AS [Contract], 
+    [vw_InvoicePrint].[CompanyId] AS [CompanyId], 
+    [vw_InvoicePrint].[ChargeSymbol] AS [ChargeSymbol]
+    FROM [dbo].[vw_InvoicePrint] AS [vw_InvoicePrint]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InvoicingApp_NailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="vw_InvoicePrint">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ChargeId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="StratDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="ChargeId" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Units" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Tax" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CompanyName" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChargeSymbol" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="InvoicingApp_NailEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="vw_InvoicePrint" EntityType="Self.vw_InvoicePrint" />
+          <FunctionImport Name="GetInvoceDetails" ReturnType="Collection(InvoicingApp_NailModel.GetInvoceDetails_Result)">
+          <Parameter Name="ClientId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTotalAndTax" ReturnType="Collection(InvoicingApp_NailModel.GetTotalAndTax_Result)">
+          <Parameter Name="ClientId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetInvoceDetails_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="InvoiceNumber" Nullable="false" MaxLength="400" />
+          <Property Type="Int32" Name="ClientId" Nullable="false" />
+          <Property Type="DateTime" Name="InvoiceDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="StratDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ChargeId" Nullable="false" />
+          <Property Type="Decimal" Name="Rate" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Units" Nullable="true" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Tax" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="450" />
+          <Property Type="String" Name="Contract" Nullable="true" />
+          <Property Type="String" Name="ChargeSymbol" Nullable="true" MaxLength="450" />
+        </ComplexType>
+        <ComplexType Name="GetTotalAndTax_Result">
+          <Property Type="Decimal" Name="Tax" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InvoicingApp_NailModelStoreContainer" CdmEntityContainer="InvoicingApp_NailEntities1">
+          <EntitySetMapping Name="vw_InvoicePrint">
+            <EntityTypeMapping TypeName="InvoicingApp_NailModel.vw_InvoicePrint">
+              <MappingFragment StoreEntitySet="vw_InvoicePrint">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="StratDate" ColumnName="StratDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="ChargeSymbol" ColumnName="ChargeSymbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetInvoceDetails" FunctionName="InvoicingApp_NailModel.Store.GetInvoceDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvoicingApp_NailModel.GetInvoceDetails_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="StratDate" ColumnName="StratDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="ChargeSymbol" ColumnName="ChargeSymbol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTotalAndTax" FunctionName="InvoicingApp_NailModel.Store.GetTotalAndTax">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvoicingApp_NailModel.GetTotalAndTax_Result">
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

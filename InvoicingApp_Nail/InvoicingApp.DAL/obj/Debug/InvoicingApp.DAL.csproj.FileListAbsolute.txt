@@ -1,0 +1,16 @@
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\InvoicingApp.DAL.dll.config
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\InvoicingApp.DAL.dll
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\InvoicingApp.DAL.pdb
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\EntityFramework.dll
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\EntityFramework.xml
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\obj\Debug\InvoicingApp.DAL.csprojResolveAssemblyReference.cache
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\obj\Debug\InvoicingApp.DAL.Migrations.FirstRunNail.resources
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\obj\Debug\InvoicingApp.DAL.csproj.GenerateResource.Cache
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\obj\Debug\InvoicingApp.DAL.dll
+D:\InvoicingApp\InvoicingApp_Nail\InvoicingApp.DAL\obj\Debug\InvoicingApp.DAL.pdb
